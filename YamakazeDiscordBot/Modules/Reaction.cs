@@ -11,16 +11,17 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Reaction : ModuleBase<SocketCommandContext>
     {
-        private static string _baseurl="https://purrbot.site/api/img/sfw";
+        private static string _baseurlpurr="https://purrbot.site/api/img/sfw";
+        private static string _baseurlneko = "https://nekos.life/api/v2/img";
 
         [Command("bite")]
         [Summary("Bite someone or get bite by the bot")]
         public async Task BiteReac(IGuildUser user = null)
         {
-            string url = _baseurl + "/bite/gif";
+            string url = _baseurlpurr + "/bite/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"You want to be bite {Context.User.Mention} ? Okay...";
@@ -71,10 +72,10 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Cuddle someone or be cuddle by the bot")]
         public async Task CuddleReac(IGuildUser user = null)
         {
-            string url = _baseurl + "/cuddle/gif";
+            string url = _baseurlpurr + "/cuddle/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"You want some cuddle {Context.User.Mention} ? Okay... ";
@@ -99,10 +100,10 @@ namespace YamakazeDiscordBot.Modules
         [Summary("I feed you or you feed someone")]
         public async Task FeedReac(IGuildUser user =null)
         {
-            string url = _baseurl + "/feed/gif";
+            string url = _baseurlpurr + "/feed/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"Okay... I will feed you, {Context.User.Mention}";
@@ -127,10 +128,10 @@ namespace YamakazeDiscordBot.Modules
         [Summary("I hug you or you can hug someone")]
         public async Task HugReac(IGuildUser user = null)
         {
-            string url = _baseurl + "/hug/gif";
+            string url = _baseurlpurr + "/hug/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"You... You need an hug, {Context.User.Mention} ? Okay... There you go";
@@ -155,10 +156,10 @@ namespace YamakazeDiscordBot.Modules
         [Summary("You realy want that ? Hentai-kun!")]
         public async Task KissReac(IGuildUser user = null)
         {
-            string url = _baseurl + "/kiss/gif";
+            string url = _baseurlpurr + "/kiss/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"You... You really want that, {Context.User.Mention} ? Hentai-san...";
@@ -183,10 +184,10 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Uuhh ???")]
         public async Task LickReac(IGuildUser user=null)
         {
-            string url = _baseurl + "/lick/gif";
+            string url = _baseurlpurr + "/lick/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"You... What ? {Context.User.Mention} ? Are ... Are you okay ?";
@@ -211,10 +212,10 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Give a headpat at someone or the bot will give it to you")]
         public async Task PatReac(IGuildUser user = null)
         {
-            string url = _baseurl + "/pat/gif";
+            string url = _baseurlpurr + "/pat/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"You... You need an headpat, {Context.User.Mention} ?\n Okay... There there, you did well...";
@@ -239,10 +240,10 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Poke or be poked")]
         public async Task PokeReac(IGuildUser user = null)
         {
-            string url = _baseurl + "/poke/gif";
+            string url = _baseurlpurr + "/poke/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"You... Are you here {Context.User.Mention} ? Hi hi hi... ";
@@ -267,17 +268,17 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Slap someone or be slapped")]
         public async Task SlapReac(IGuildUser user = null)
         {
-            string url = _baseurl + "/slap/gif";
+            string url = _baseurlpurr + "/slap/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"You... You did a bad thing don't you, {Context.User.Mention} ?";
             }
             else
             {
-                message = $"You did something bab {user.Mention} don't you ?\n {Context.User.Mention} has slapped you...";
+                message = $"You did something bad {user.Mention} don't you ?\n {Context.User.Mention} has slapped you...";
             }
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
@@ -295,10 +296,10 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Tickle someone or be tickeled")]
         public async Task TickleReac(IGuildUser user = null)
         {
-            string url = _baseurl + "/tickle/gif";
+            string url = _baseurlpurr + "/tickle/gif";
             string message = "";
             Requethttp req = new Requethttp();
-            string giflink = await req.GetLinkImage(url);
+            string giflink = await req.GetLinkImagePurr(url);
             if (user == null)
             {
                 message = $"Hey..., {Context.User.Mention}... Tickle tickle tickle !!";

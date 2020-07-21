@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace YamakazeDiscordBot.Modules.Classe
+namespace YamakazeDiscordBot.Modules.ClasseUtiles
 {
-    public class DataJson
+    public class DataJsonPurr
     {
         private int code;
         private string link;
@@ -13,7 +13,7 @@ namespace YamakazeDiscordBot.Modules.Classe
         public string Link { get => link; set => link = value; }
         public int Time { get => time; set => time = value; }
 
-        public DataJson(int cod, string lin, int tim)
+        public DataJsonPurr(int cod, string lin, int tim)
         {
             Code = cod;
             Link = lin;
