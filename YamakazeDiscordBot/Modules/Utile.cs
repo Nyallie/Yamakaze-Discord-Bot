@@ -14,7 +14,6 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Affiche toute les commandes du bot")]
         public async Task HelpCommand()
         {
-            List<CommandInfo> commands = Program._commands.Commands.ToList();
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.WithTitle("Hello, I'm Yamakaze...")
                 .WithDescription("Here are my commands, I wish you will like they...\n" +
@@ -22,7 +21,7 @@ namespace YamakazeDiscordBot.Modules
             embedBuilder.AddField("Utiles :", "help, ping, avatar, botinfo");
             embedBuilder.AddField("Moderation :", "kick, ban, unban, purge");
             embedBuilder.AddField("Fun :", "lenny, say");
-            embedBuilder.AddField("Reaction :", "bite, baka, cuddle, feed, hug, kiss, \nlick, pat, putin, poke, slap, tickle");
+            embedBuilder.AddField("Reaction :", "bite, baka, cuddle, feed, hug, kiss, \nlick, pat, poke, putin, slap, tickle");
             embedBuilder.AddField("Nsfw :", "nhsauce");
             embedBuilder.AddField("Help :", "Prefix : y!");
             embedBuilder.WithFooter(footer =>
@@ -67,6 +66,24 @@ namespace YamakazeDiscordBot.Modules
             });
             Embed embed = embedbuilder.Build();
             await ReplyAsync(embed: embed);
+        }
+
+        [Command("helpAll")]
+        [Summary("Explique ce que chaque commandes fait.")]
+        public async Task Help()
+        {
+            List<CommandInfo> commands = Program._commands.Commands.ToList();
+            EmbedBuilder embedBuilder = new EmbedBuilder();
+
+            foreach (CommandInfo command in commands)
+            {
+                // Get the command Summary attribute information
+                string embedFieldText = command.Summary ?? "No description available\n";
+
+                embedBuilder.AddField(command.Name, embedFieldText);
+            }
+
+            await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
         }
     }
 }

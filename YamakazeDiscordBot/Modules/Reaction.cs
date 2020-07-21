@@ -70,32 +70,6 @@ namespace YamakazeDiscordBot.Modules
             await ReplyAsync(embed: embed);
         }
 
-        [Command("putin")]
-        [Summary("Be putined")]
-        public async Task PutinReac(IGuildUser user = null)
-        {
-            string giflink = "https://media1.tenor.com/images/17d841bae0f15bc0fd553bacb49299b5/tenor.gif?itemid=17778546";
-            string message = "";
-            if (user == null)
-            {
-                message = "NO HENTAI, ONLY PUTIN!!";
-            }
-            else
-            {
-                message = $"{Context.User.Mention} have to say at {user.Mention}: NO HENTAI, ONLY PUTIN!!";
-            }
-            var EmbedBuilder = new EmbedBuilder()
-                .WithDescription(message)
-                .WithImageUrl(giflink)
-                .WithFooter(footer =>
-                {
-                    footer
-                    .WithText("Powered by the Dev of this bot");
-                });
-            Embed embed = EmbedBuilder.Build();
-            await ReplyAsync(embed: embed);
-        }
-
         [Command("cuddle")]
         [Summary("Cuddle someone or be cuddle by the bot")]
         public async Task CuddleReac(IGuildUser user = null)
@@ -287,6 +261,32 @@ namespace YamakazeDiscordBot.Modules
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
+                });
+            Embed embed = EmbedBuilder.Build();
+            await ReplyAsync(embed: embed);
+        }
+
+        [Command("putin")]
+        [Summary("Be putined")]
+        public async Task PutinReac(IGuildUser user = null)
+        {
+            string giflink = "https://media1.tenor.com/images/17d841bae0f15bc0fd553bacb49299b5/tenor.gif?itemid=17778546";
+            string message = "";
+            if (user == null)
+            {
+                message = "NO HENTAI, ONLY PUTIN!!";
+            }
+            else
+            {
+                message = $"{Context.User.Mention} have to say at {user.Mention}: NO HENTAI, ONLY PUTIN!!";
+            }
+            var EmbedBuilder = new EmbedBuilder()
+                .WithDescription(message)
+                .WithImageUrl(giflink)
+                .WithFooter(footer =>
+                {
+                    footer
+                    .WithText("Powered by the Dev of this bot");
                 });
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
