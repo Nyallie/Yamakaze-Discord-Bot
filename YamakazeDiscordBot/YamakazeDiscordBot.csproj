@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>YamakazeDiscordBot.Program</StartupObject>
     <ApplicationIcon>JPEG_20200308_120150.ico</ApplicationIcon>
+    <Authors>Heliodore24</Authors>
   </PropertyGroup>
 
   <ItemGroup>

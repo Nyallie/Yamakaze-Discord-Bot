@@ -14,7 +14,9 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Affiche toute les commandes du bot")]
         public async Task HelpCommand()
         {
+            Color color = new Color(111,38,184);
             EmbedBuilder embedBuilder = new EmbedBuilder();
+            embedBuilder.WithColor(color);
             embedBuilder.WithTitle("Hello, I'm Yamakaze...")
                 .WithDescription("Here are my commands, I wish you will like they...\n" +
                 "It... it's okay if you don't like them... really...");
