@@ -22,7 +22,7 @@ namespace YamakazeDiscordBot.Modules
             embedBuilder.AddField("Utiles :", "help, ping, avatar, botinfo");
             embedBuilder.AddField("Moderation :", "kick, ban, unban, purge");
             embedBuilder.AddField("Fun :", "lenny, say");
-            embedBuilder.AddField("Reaction :", "bite, cuddle, feed, hug, kiss, \nlick, pat, putin, poke, slap, tickle");
+            embedBuilder.AddField("Reaction :", "bite, baka, cuddle, feed, hug, kiss, \nlick, pat, putin, poke, slap, tickle");
             embedBuilder.AddField("Nsfw :", "nhsauce");
             embedBuilder.AddField("Help :", "Prefix : y!");
             embedBuilder.WithFooter(footer =>

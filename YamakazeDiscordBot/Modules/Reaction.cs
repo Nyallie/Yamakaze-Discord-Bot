@@ -12,7 +12,7 @@ namespace YamakazeDiscordBot.Modules
     public class Reaction : ModuleBase<SocketCommandContext>
     {
         private static string _baseurlpurr="https://purrbot.site/api/img/sfw";
-        private static string _baseurlneko = "https://nekos.life/api/v2/img";
+        private static string _baseurlneko = "https://nekos.life/api/v2/img/";
 
         [Command("bite")]
         [Summary("Bite someone or get bite by the bot")]
@@ -37,6 +37,34 @@ namespace YamakazeDiscordBot.Modules
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
+                });
+            Embed embed = EmbedBuilder.Build();
+            await ReplyAsync(embed: embed);
+        }
+
+        [Command("baka")]
+        [Summary("The bot tell you that you're a baka or you tell someone he is a baka")]
+        public async Task BakaReac(IGuildUser user = null)
+        {
+            string url = _baseurlneko + "baka";
+            string message = "";
+            Requethttp req = new Requethttp();
+            string giflink = await req.GetLinkImageNeko(url);
+            if (user == null)
+            {
+                message = $"{Context.User.Mention}... Baka...";
+            }
+            else
+            {
+                message = $"{Context.User.Mention} has to tell to {user.Mention} : Baka !";
+            }
+            var EmbedBuilder = new EmbedBuilder()
+                .WithDescription(message)
+                .WithImageUrl(giflink)
+                .WithFooter(footer =>
+                {
+                    footer
+                    .WithText("Powered by Nekos.life Api");
                 });
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
