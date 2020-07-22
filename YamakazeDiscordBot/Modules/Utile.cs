@@ -25,7 +25,7 @@ namespace YamakazeDiscordBot.Modules
             embedBuilder.AddField("Fun :", "lenny, say");
             embedBuilder.AddField("Reaction :", "bite, baka, cuddle, feed, hug, kiss, \nlick, pat, poke, putin, slap, tickle");
             embedBuilder.AddField("Nsfw :", "nhsauce");
-            embedBuilder.AddField("Help :", "Prefix : y!");
+            embedBuilder.AddField("Help :", "Prefix : "+Program._prop.Prefix);
             embedBuilder.WithFooter(footer =>
             {
                 footer
