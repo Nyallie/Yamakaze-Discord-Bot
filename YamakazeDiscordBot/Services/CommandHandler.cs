@@ -1,5 +1,6 @@
 ﻿using Discord.Commands;
 using Discord.WebSocket;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,11 +14,13 @@ namespace YamakazeDiscordBot
     {
         private readonly DiscordSocketClient _client;
         private readonly CommandService _commands;
+        private JObject _json;
 
-        public CommandHandler(DiscordSocketClient client, CommandService commands)
+        public CommandHandler(DiscordSocketClient client, CommandService commands, JObject js)
         {
             _commands = commands;
             _client = client;
+            _json = js;
         }
 
         public async Task InstallCommandsAsync()
@@ -45,9 +48,9 @@ namespace YamakazeDiscordBot
 
             // Create a number to track where the prefix ends and the command begins
             int argPos = 0;
-
+            string prefix = _json.GetValue("prefix").ToString();
             // Determine if the message is a command based on the prefix and make sure no bots trigger commands
-            if (!(message.HasStringPrefix("y!", ref argPos) ||
+            if (!(message.HasStringPrefix(prefix, ref argPos) ||
                 message.HasMentionPrefix(_client.CurrentUser, ref argPos)) ||
                 message.Author.IsBot)
                 return;
