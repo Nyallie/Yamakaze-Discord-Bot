@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using YamakazeDiscordBot.Modules.ClasseUtiles;
 using YamakazeDiscordBot.Services;
 
 namespace YamakazeDiscordBot.Modules
@@ -13,6 +14,7 @@ namespace YamakazeDiscordBot.Modules
     {
         private static string _baseurlpurr="https://purrbot.site/api/img/sfw";
         private static string _baseurlneko = "https://nekos.life/api/v2/img/";
+        private readonly LogConsole log = new LogConsole();
 
         [Command("bite")]
         [Summary("Bite someone or get bite by the bot")]
@@ -39,6 +41,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "bite");
             await ReplyAsync(embed: embed);
         }
 
@@ -67,6 +70,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by Nekos.life Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "baka");
             await ReplyAsync(embed: embed);
         }
 
@@ -95,6 +99,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "cuddle");
             await ReplyAsync(embed: embed);
         }
 
@@ -123,6 +128,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "feed");
             await ReplyAsync(embed: embed);
         }
 
@@ -151,6 +157,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "hug");
             await ReplyAsync(embed: embed);
         }
 
@@ -179,6 +186,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "kiss");
             await ReplyAsync(embed: embed);
         }
 
@@ -207,6 +215,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "lick");
             await ReplyAsync(embed: embed);
         }
 
@@ -235,6 +244,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "pat");
             await ReplyAsync(embed: embed);
         }
 
@@ -263,6 +273,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "poke");
             await ReplyAsync(embed: embed);
         }
 
@@ -289,6 +300,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by the Dev of this bot");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "putin");
             await ReplyAsync(embed: embed);
         }
 
@@ -317,6 +329,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "slap");
             await ReplyAsync(embed: embed);
         }
 
@@ -345,6 +358,7 @@ namespace YamakazeDiscordBot.Modules
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
+            log.WriteCommandToConsole(Context.User.Username, "tickle");
             await ReplyAsync(embed: embed);
         }
     }

@@ -60,7 +60,7 @@ namespace YamakazeDiscordBot
         private Task Log(LogMessage msg)
         {
             Console.WriteLine(msg.ToString());
-            return Task.CompletedTask; ;
+            return Task.CompletedTask;
         }
     }
 }
