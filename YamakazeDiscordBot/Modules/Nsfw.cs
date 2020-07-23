@@ -10,7 +10,6 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Nsfw : ModuleBase<SocketCommandContext>
     {
-        private readonly LogConsole log = new LogConsole();
 
         [Command("nhsauce")]
         [Summary("Renvoie un lien Nhentai en fonction du 6digit donner en pinguant quelqu'un")]
@@ -27,7 +26,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message);                
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            log.WriteCommandToConsole(Context.User.Username, "nhsauce");
+            Program.log.WriteCommandToConsole(Context.User.Username, "nhsauce");
         }
 
         [Command("nhsauce")]
@@ -45,7 +44,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message);
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            log.WriteCommandToConsole(Context.User.Username, "nhsauce");
+            Program.log.WriteCommandToConsole(Context.User.Username, "nhsauce");
         }
     }
 }

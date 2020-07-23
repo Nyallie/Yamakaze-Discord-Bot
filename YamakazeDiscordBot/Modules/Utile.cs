@@ -11,8 +11,6 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Utile : ModuleBase<SocketCommandContext>
     {
-        private readonly LogConsole log = new LogConsole();
-
         [Command("help")]
         [Summary("Affiche toute les commandes du bot")]
         public async Task HelpCommand()
@@ -34,7 +32,7 @@ namespace YamakazeDiscordBot.Modules
                 footer
                 .WithText("Wiki du personnage Yamakaze :\n https://kancolle.fandom.com/wiki/Yamakaze");
             });
-            log.WriteCommandToConsole(Context.User.Username, "help");
+            Program.log.WriteCommandToConsole(Context.User.Username, "help");
             await ReplyAsync("", false, embedBuilder.Build());
         }
 
@@ -44,7 +42,7 @@ namespace YamakazeDiscordBot.Modules
         {
             var EmbedBuilder = new EmbedBuilder().WithDescription("Pong! :ping_pong:**" + Program._client.Latency + " ms**");
             Embed embed = EmbedBuilder.Build();
-            log.WriteCommandToConsole(Context.User.Username, "ping");
+            Program.log.WriteCommandToConsole(Context.User.Username, "ping");
             await ReplyAsync(embed: embed);
         }
 
@@ -56,9 +54,9 @@ namespace YamakazeDiscordBot.Modules
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.WithTitle(Context.User.Username.ToString() + " avatar.");
             embedBuilder.WithImageUrl(avatarlink);
-            Embed emded = embedBuilder.Build();
-            log.WriteCommandToConsole(Context.User.Username, "avatar");
+            Embed emded = embedBuilder.Build();            
             await ReplyAsync(embed: emded);
+            Program.log.WriteCommandToConsole(Context.User.Username, "avatar");
         }
 
         [Command("botinfo")]
@@ -74,8 +72,8 @@ namespace YamakazeDiscordBot.Modules
                 footer.WithText("For more information, send a message to the developper");
             });
             Embed embed = embedbuilder.Build();
-            log.WriteCommandToConsole(Context.User.Username, "botinfo");
             await ReplyAsync(embed: embed);
+            Program.log.WriteCommandToConsole(Context.User.Username, "botinfo");
         }
 
         [Command("helpall")]
@@ -90,8 +88,8 @@ namespace YamakazeDiscordBot.Modules
                 string embedFieldText = command.Summary ?? "No description available\n";
                 embedBuilder.AddField(command.Name, embedFieldText);
             }
-            log.WriteCommandToConsole(Context.User.Username, "helpall");
             await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
+            Program.log.WriteCommandToConsole(Context.User.Username, "helpall");
         }
     }
 }

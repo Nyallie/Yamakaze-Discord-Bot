@@ -11,7 +11,6 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Moderation : ModuleBase<SocketCommandContext>
     {
-        private readonly LogConsole log = new LogConsole();
 
         [Command("purge")]
         [Alias("clean")]
@@ -47,7 +46,7 @@ namespace YamakazeDiscordBot.Modules
                 // if you decide to update you won't have to change this line.
                 await (Context.Channel as ITextChannel).DeleteMessagesAsync(filteredMessages);
                 await ReplyAsync($"Done. Removed {count} {(count > 1 ? "messages" : "message")}.");
-                log.WriteCommandToConsole(Context.User.Username, "purge");
+                Program.log.WriteCommandToConsole(Context.User.Username, "purge");
             }
         }
 
@@ -74,7 +73,7 @@ namespace YamakazeDiscordBot.Modules
                 });
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            log.WriteCommandToConsole(Context.User.Username, "ban");
+            Program.log.WriteCommandToConsole(Context.User.Username, "ban");
         }
 
         [Command("unban")]
@@ -99,7 +98,7 @@ namespace YamakazeDiscordBot.Modules
                 });
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            log.WriteCommandToConsole(Context.User.Username, "unban");
+            Program.log.WriteCommandToConsole(Context.User.Username, "unban");
         }
 
         [Command("kick")]
@@ -125,7 +124,7 @@ namespace YamakazeDiscordBot.Modules
                 });
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            log.WriteCommandToConsole(Context.User.Username, "kick");
+            Program.log.WriteCommandToConsole(Context.User.Username, "kick");
         }
     }
 }

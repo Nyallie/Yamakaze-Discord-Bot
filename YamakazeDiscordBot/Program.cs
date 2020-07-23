@@ -23,7 +23,8 @@ namespace YamakazeDiscordBot
         private CommandHandler _commandhandler;
         private string _json;
         public static PropertiesJson _prop;
-        
+        public static LogConsole log = new LogConsole();
+
         public async Task MainAsync()
         {
             if (!File.Exists("Properties/config.json"))
