@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using YamakazeDiscordBot.Modules.ClasseUtiles;
+using YamakazeDiscordBot.Services;
 
 namespace YamakazeDiscordBot
 {
@@ -23,7 +24,8 @@ namespace YamakazeDiscordBot
         private CommandHandler _commandhandler;
         private string _json;
         public static PropertiesJson _prop;
-        public static LogConsole log = new LogConsole();
+        public static LogConsole log;
+        public static DataJsonHololive hololive;
 
         public async Task MainAsync()
         {
@@ -37,6 +39,10 @@ namespace YamakazeDiscordBot
                 string json = JsonConvert.SerializeObject(prop);//Transformer prop en json dans une variable string.
                 File.WriteAllText("Properties/config.json",json);//Ecrire le string dans un fichier .json.
             }
+            Console.WriteLine("Call for hololive data");
+            hololive = await new Requethttp().GetDataJsonHololive("https://homoliver.live/api/v1/allvideos?limit=150");
+            Console.WriteLine("HOlolive data recevied");
+            log = log = new LogConsole();
             _json = File.ReadAllText("Properties/config.json");
             _prop = JsonConvert.DeserializeObject<PropertiesJson>(_json);
             _client = new DiscordSocketClient();

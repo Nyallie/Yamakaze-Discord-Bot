@@ -53,5 +53,23 @@ namespace YamakazeDiscordBot.Services
             }
             return imagelink;
         }
+
+        public async Task<DataJsonHololive> GetDataJsonHololive(string url)
+        {
+            DataJsonHololive data;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                HttpContent content = response.Content;
+                string result = await content.ReadAsStringAsync();
+                data = JsonConvert.DeserializeObject<DataJsonHololive>(result);
+            }
+            else
+            {
+                data = new DataJsonHololive();
+            }
+            return data;
+        }
     }
 }
