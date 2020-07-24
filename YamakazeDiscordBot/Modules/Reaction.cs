@@ -14,6 +14,7 @@ namespace YamakazeDiscordBot.Modules
     {
         private static string _baseurlpurr="https://purrbot.site/api/img/sfw";
         private static string _baseurlneko = "https://nekos.life/api/v2/img/";
+        private Color _color = new Color(169,9,208);
 
         [Command("bite")]
         [Summary("Bite someone or get bite by the bot")]
@@ -34,13 +35,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "bite");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "bite");
             await ReplyAsync(embed: embed);
         }
 
@@ -63,13 +65,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by Nekos.life Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "baka");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "baka");
             await ReplyAsync(embed: embed);
         }
 
@@ -92,13 +95,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "cuddle");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "cuddle");
             await ReplyAsync(embed: embed);
         }
 
@@ -121,13 +125,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "feed");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "feed");
             await ReplyAsync(embed: embed);
         }
 
@@ -150,13 +155,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "hug");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "hug");
             await ReplyAsync(embed: embed);
         }
 
@@ -179,13 +185,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "kiss");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "kiss");
             await ReplyAsync(embed: embed);
         }
 
@@ -208,13 +215,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "lick");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "lick");
             await ReplyAsync(embed: embed);
         }
 
@@ -237,13 +245,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "pat");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "pat");
             await ReplyAsync(embed: embed);
         }
 
@@ -266,13 +275,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "poke");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "poke");
             await ReplyAsync(embed: embed);
         }
 
@@ -293,13 +303,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by the Dev of this bot");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "putin");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "putin");
             await ReplyAsync(embed: embed);
         }
 
@@ -322,13 +333,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "slap");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "slap");
             await ReplyAsync(embed: embed);
         }
 
@@ -351,13 +363,14 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription(message)
                 .WithImageUrl(giflink)
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
                     .WithText("Powered by PurrBot Api");
                 });
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "tickle");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "tickle");
             await ReplyAsync(embed: embed);
         }
     }

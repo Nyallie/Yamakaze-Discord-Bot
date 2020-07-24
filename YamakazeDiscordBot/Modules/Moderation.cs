@@ -11,7 +11,7 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Moderation : ModuleBase<SocketCommandContext>
     {
-
+        private Color _color = new Color(214,51,145);
         [Command("purge")]
         [Alias("clean")]
         [Summary("Removes X messages from the current channel.")]
@@ -45,8 +45,12 @@ namespace YamakazeDiscordBot.Modules
                 // but I'd recommend leaving it as it's what's required on 2.x, so
                 // if you decide to update you won't have to change this line.
                 await (Context.Channel as ITextChannel).DeleteMessagesAsync(filteredMessages);
-                await ReplyAsync($"Done. Removed {count} {(count > 1 ? "messages" : "message")}.");
-                Program.log.WriteCommandToConsole(Context.User.Username, "purge");
+                var EmbedBuilder = new EmbedBuilder()
+                    .WithDescription($"Done. Removed {count} {(count > 1 ? "messages" : "message")}.")
+                    .WithColor(_color);
+                Embed embed = EmbedBuilder.Build();
+                await ReplyAsync(embed: embed);
+                Program.log.WriteCommandToConsole(Context.User.ToString(), "purge");
             }
         }
 
@@ -65,6 +69,7 @@ namespace YamakazeDiscordBot.Modules
             await Context.Guild.AddBanAsync(user, 1, reason);//Ban a user
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription($":white_check_mark: {user.Mention} was banned.\n **Reason** {reason}")
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
@@ -73,7 +78,7 @@ namespace YamakazeDiscordBot.Modules
                 });
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            Program.log.WriteCommandToConsole(Context.User.Username, "ban");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "ban");
         }
 
         [Command("unban")]
@@ -90,6 +95,7 @@ namespace YamakazeDiscordBot.Modules
             await Context.Guild.RemoveBanAsync(user);//Unban a user
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription($":white_check_mark: {user.Mention} was unbanned.")
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
@@ -98,7 +104,7 @@ namespace YamakazeDiscordBot.Modules
                 });
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            Program.log.WriteCommandToConsole(Context.User.Username, "unban");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "unban");
         }
 
         [Command("kick")]
@@ -116,6 +122,7 @@ namespace YamakazeDiscordBot.Modules
             await user.KickAsync(reason);//Kick a user
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription($":white_check_mark: {user.Mention} was kick.\n **Reason** {reason}")
+                .WithColor(_color)
                 .WithFooter(footer =>
                 {
                     footer
@@ -124,7 +131,7 @@ namespace YamakazeDiscordBot.Modules
                 });
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            Program.log.WriteCommandToConsole(Context.User.Username, "kick");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "kick");
         }
     }
 }

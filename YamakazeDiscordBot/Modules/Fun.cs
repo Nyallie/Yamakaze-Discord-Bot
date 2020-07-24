@@ -14,7 +14,7 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Repeat what the user say")]
         public async Task SayAsync([Remainder][Summary("Repete ce qui suis la commande say")] string echo)
         {
-            Program.log.WriteCommandToConsole(Context.User.Username, "say",echo);
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "say",echo);
             await ReplyAsync(echo);
         }
 
@@ -22,7 +22,7 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Send a lenny face")]
         public async Task Lenny()
         {
-            Program.log.WriteCommandToConsole(Context.User.Username, "lenny");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "lenny");
             await ReplyAsync("( ͡° ͜ʖ ͡°)");
         }
 

@@ -10,7 +10,7 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Nsfw : ModuleBase<SocketCommandContext>
     {
-
+        private Color _color = new Color(203, 38, 76); 
         [Command("nhsauce")]
         [Summary("Renvoie un lien Nhentai en fonction du 6digit donner en pinguant quelqu'un")]
         [Alias("nhs")]
@@ -23,10 +23,11 @@ namespace YamakazeDiscordBot.Modules
             }
             string message = $":eyes: {user.Mention} Here the sauce. \n https://www.nhentai.net/g/{sauce}";
             var EmbedBuilder = new EmbedBuilder()
-                .WithDescription(message);                
+                .WithDescription(message)
+                .WithColor(_color);                
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            Program.log.WriteCommandToConsole(Context.User.Username, "nhsauce");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "nhsauce");
         }
 
         [Command("nhsauce")]
@@ -41,10 +42,11 @@ namespace YamakazeDiscordBot.Modules
             }
             string message = $":eyes: Here the sauce.\n https://www.nhentai.net/g/{sauce}";
             var EmbedBuilder = new EmbedBuilder()
-                .WithDescription(message);
+                .WithDescription(message)
+                .WithColor(_color);
             Embed embed = EmbedBuilder.Build();
             await ReplyAsync(embed: embed);
-            Program.log.WriteCommandToConsole(Context.User.Username, "nhsauce");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "nhsauce");
         }
     }
 }

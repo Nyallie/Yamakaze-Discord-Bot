@@ -33,7 +33,7 @@ namespace YamakazeDiscordBot.Modules
                 footer
                 .WithText("Wiki du personnage Yamakaze :\n https://kancolle.fandom.com/wiki/Yamakaze");
             });
-            Program.log.WriteCommandToConsole(Context.User.Username, "help");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "help");
             await ReplyAsync("", false, embedBuilder.Build());
         }
 
@@ -43,7 +43,7 @@ namespace YamakazeDiscordBot.Modules
         {
             var EmbedBuilder = new EmbedBuilder().WithDescription("Pong! :ping_pong:**" + Program._client.Latency + " ms**");
             Embed embed = EmbedBuilder.Build();
-            Program.log.WriteCommandToConsole(Context.User.Username, "ping");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "ping");
             await ReplyAsync(embed: embed);
         }
 
@@ -57,7 +57,7 @@ namespace YamakazeDiscordBot.Modules
             embedBuilder.WithImageUrl(avatarlink);
             Embed emded = embedBuilder.Build();            
             await ReplyAsync(embed: emded);
-            Program.log.WriteCommandToConsole(Context.User.Username, "avatar");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "avatar");
         }
 
         [Command("botinfo")]
@@ -74,7 +74,7 @@ namespace YamakazeDiscordBot.Modules
             });
             Embed embed = embedbuilder.Build();
             await ReplyAsync(embed: embed);
-            Program.log.WriteCommandToConsole(Context.User.Username, "botinfo");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "botinfo");
         }
 
         [Command("helpall")]
@@ -90,7 +90,7 @@ namespace YamakazeDiscordBot.Modules
                 embedBuilder.AddField(command.Name, embedFieldText);
             }
             await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
-            Program.log.WriteCommandToConsole(Context.User.Username, "helpall");
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "helpall");
         }
     }
 }
