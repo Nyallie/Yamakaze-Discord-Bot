@@ -18,13 +18,14 @@ namespace YamakazeDiscordBot.Modules
         {
             Random rnd = new Random();
             VideoHololive vid = Program.hololive.Result[rnd.Next(Program.hololive.Result.Count)];
-            string url = "https://www.youtube.com/watch?v=" + vid.VideoId;
+            string url = vid.VideoId;
+            string vidid = vid.VideoId.Remove(0,32);
             EmbedBuilder embedBuilder = new EmbedBuilder()
                 .WithTitle("Random Hololive video")
                 .AddField(vid.VideoName,vid.Vtuber+"\n"+url)
                 .WithUrl(url)
                 .WithColor(_color)
-                .WithImageUrl($"https://img.youtube.com/vi/{vid.VideoId}/hqdefault.jpg");
+                .WithImageUrl($"https://img.youtube.com/vi/{vidid}/hqdefault.jpg");
             Embed embed = embedBuilder.Build();
             Program.log.WriteCommandToConsole(Context.User.ToString(), "hololive");
             await ReplyAsync(embed: embed);

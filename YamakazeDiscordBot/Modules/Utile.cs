@@ -11,17 +11,17 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Utile : ModuleBase<SocketCommandContext>
     {
+        private Color _color = new Color(111, 38, 184);
         [Command("help")]
         [Summary("Affiche toute les commandes du bot")]
         public async Task HelpCommand()
         {
-            Color color = new Color(111,38,184);
             EmbedBuilder embedBuilder = new EmbedBuilder();
-            embedBuilder.WithColor(color);
+            embedBuilder.WithColor(_color);
             embedBuilder.WithTitle("Hello, I'm Yamakaze...")
                 .WithDescription("Here are my commands, I wish you will like they...\n" +
                 "It... it's okay if you don't like them... really...");
-            embedBuilder.AddField("Utiles :", "help, ping, avatar, botinfo, helpall");
+            embedBuilder.AddField("Utiles :", "help, ping, avatar, botinfo, \nhelpall, yamakaze");
             embedBuilder.AddField("Moderation :", "kick, ban, unban, purge");
             embedBuilder.AddField("Fun :", "lenny, say");
             embedBuilder.AddField("Reaction :", "bite, baka, cuddle, feed, hug, kiss, \nlick, pat, poke, putin, slap, tickle");
@@ -31,7 +31,7 @@ namespace YamakazeDiscordBot.Modules
             embedBuilder.WithFooter(footer =>
             {
                 footer
-                .WithText("Wiki du personnage Yamakaze :\n https://kancolle.fandom.com/wiki/Yamakaze");
+                .WithText("Yamakaze Wiki :\n https://kancolle.fandom.com/wiki/Yamakaze");
             });
             Program.log.WriteCommandToConsole(Context.User.ToString(), "help");
             await ReplyAsync("", false, embedBuilder.Build());
@@ -41,7 +41,7 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Get the latency of the bot")]
         public async Task Ping()
         {
-            var EmbedBuilder = new EmbedBuilder().WithDescription("Pong! :ping_pong:**" + Program._client.Latency + " ms**");
+            var EmbedBuilder = new EmbedBuilder().WithDescription("Pong! :ping_pong:**" + Program._client.Latency + " ms**").WithColor(_color);
             Embed embed = EmbedBuilder.Build();
             Program.log.WriteCommandToConsole(Context.User.ToString(), "ping");
             await ReplyAsync(embed: embed);
@@ -54,7 +54,7 @@ namespace YamakazeDiscordBot.Modules
             string avatarlink = Context.User.GetAvatarUrl();
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.WithTitle(Context.User.Username.ToString() + " avatar.");
-            embedBuilder.WithImageUrl(avatarlink);
+            embedBuilder.WithImageUrl(avatarlink).WithColor(_color);
             Embed emded = embedBuilder.Build();            
             await ReplyAsync(embed: emded);
             Program.log.WriteCommandToConsole(Context.User.ToString(), "avatar");
@@ -68,6 +68,7 @@ namespace YamakazeDiscordBot.Modules
             embedbuilder.AddField("Bot version :", "0.5");
             embedbuilder.AddField("Bot developper :", "Heliodore24#5872");
             embedbuilder.AddField("Program langage and library :", "C#, Discord.Net");
+            embedbuilder.WithColor(_color);
             embedbuilder.WithFooter(footer =>
             {
                 footer.WithText("For more information, send a message to the developper");
@@ -87,10 +88,33 @@ namespace YamakazeDiscordBot.Modules
             {
                 // Get the command Summary attribute information
                 string embedFieldText = command.Summary ?? "No description available\n";
-                embedBuilder.AddField(command.Name, embedFieldText);
+                embedBuilder.AddField(command.Name, embedFieldText).WithColor(_color);
             }
             await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
             Program.log.WriteCommandToConsole(Context.User.ToString(), "helpall");
+        }
+
+        [Command("yamakaze")]
+        [Summary("Give information who Yamakaze is...")]
+        public async Task Yamakaze()
+        {
+            string message = "Her name is write '山風'.\n";
+            message += "Her name means 'Moutain Wind'.\n";
+            message += "Personality : Yamakaze is very shy and stoic. " +
+                "She is a fragile girl who wants someone to stand by her side, " +
+                "even though she denies it.";
+            EmbedBuilder embedbuilder = new EmbedBuilder();
+            embedbuilder
+                .WithTitle("Yamakaze")
+                .WithDescription(message)
+                .WithImageUrl("https://static.zerochan.net/Yamakaze.%28Kantai.Collection%29.full.2284538.png")
+                .WithColor(_color)
+                .WithFooter(footer =>
+                {
+                    footer.WithText("More information at : https://kancolle.fandom.com/wiki/Yamakaze");
+                });
+            Embed embed = embedbuilder.Build();
+            await ReplyAsync(embed: embed);
         }
     }
 }
