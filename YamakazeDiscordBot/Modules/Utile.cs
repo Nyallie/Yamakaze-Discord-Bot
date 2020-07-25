@@ -115,6 +115,7 @@ namespace YamakazeDiscordBot.Modules
                 });
             Embed embed = embedbuilder.Build();
             await ReplyAsync(embed: embed);
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "yamakaze");
         }
     }
 }

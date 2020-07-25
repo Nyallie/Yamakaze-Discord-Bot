@@ -13,7 +13,7 @@ namespace YamakazeDiscordBot.Modules.ClasseUtiles
 
         public void WriteCommandToConsole(string user,string command,string saybyuser=null)
         {
-            string message = "The user "+user+" used the command : " + command;
+            string message = "The user "+user+" used the command " + command;
             if (saybyuser != null)
             {
                 message += " and say : " + saybyuser;
