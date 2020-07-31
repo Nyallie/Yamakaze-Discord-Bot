@@ -67,7 +67,7 @@ namespace YamakazeDiscordBot.Services
             }
             else
             {
-                data = new DataJsonHololive();
+                data = null;
             }
             return data;
         }
