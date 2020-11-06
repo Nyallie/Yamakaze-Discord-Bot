@@ -98,8 +98,7 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Give information who Yamakaze is...")]
         public async Task Yamakaze()
         {
-            string message = "Her name is write '山風'.\n";
-            message += "Her name means 'Moutain Wind'.\n";
+            string message = "Her name is write '山風' and mean 'Moutain Wind'.\n";
             message += "Personality : Yamakaze is very shy and stoic. " +
                 "She is a fragile girl who wants someone to stand by her side, " +
                 "even though she denies it.";

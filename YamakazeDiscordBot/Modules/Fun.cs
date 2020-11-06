@@ -25,7 +25,5 @@ namespace YamakazeDiscordBot.Modules
             Program.log.WriteCommandToConsole(Context.User.ToString(), "lenny");
             await ReplyAsync("( ͡° ͜ʖ ͡°)");
         }
-
-        
     }
 }
