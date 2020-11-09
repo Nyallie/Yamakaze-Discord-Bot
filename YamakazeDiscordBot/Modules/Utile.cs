@@ -25,9 +25,10 @@ namespace YamakazeDiscordBot.Modules
             embedBuilder.AddField("Moderation :", "kick, ban, unban, purge");
             embedBuilder.AddField("Fun :", "lenny, say");
             embedBuilder.AddField("Reaction :", "bite, baka, cuddle, feed, hug, kiss, \nlick, pat, poke, putin, slap, tickle");
-            embedBuilder.AddField("Picture and video :","hololive");
+            embedBuilder.AddField("Picture and video :","hololive, sauce");
             embedBuilder.AddField("Nsfw :", "nhsauce");
             embedBuilder.AddField("Help :", "Prefix : "+Program._prop.Prefix);
+            embedBuilder.WithCurrentTimestamp();
             embedBuilder.WithFooter(footer =>
             {
                 footer
@@ -54,7 +55,7 @@ namespace YamakazeDiscordBot.Modules
             string avatarlink = Context.User.GetAvatarUrl();
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.WithTitle(Context.User.Username.ToString() + " avatar.");
-            embedBuilder.WithImageUrl(avatarlink).WithColor(_color);
+            embedBuilder.WithImageUrl(avatarlink).WithColor(_color).WithCurrentTimestamp();
             Embed emded = embedBuilder.Build();            
             await ReplyAsync(embed: emded);
             Program.log.WriteCommandToConsole(Context.User.ToString(), "avatar");
@@ -69,6 +70,7 @@ namespace YamakazeDiscordBot.Modules
             embedbuilder.AddField("Bot developper :", "Heliodore24#5872");
             embedbuilder.AddField("Program langage and library :", "C#, Discord.Net");
             embedbuilder.WithColor(_color);
+            embedbuilder.WithCurrentTimestamp();
             embedbuilder.WithFooter(footer =>
             {
                 footer.WithText("For more information, send a message to the developper");
@@ -83,7 +85,7 @@ namespace YamakazeDiscordBot.Modules
         public async Task Help()
         {
             List<CommandInfo> commands = Program._commands.Commands.ToList();
-            EmbedBuilder embedBuilder = new EmbedBuilder();
+            EmbedBuilder embedBuilder = new EmbedBuilder().WithCurrentTimestamp();
             foreach (CommandInfo command in commands)
             {
                 // Get the command Summary attribute information
@@ -108,6 +110,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl("https://static.zerochan.net/Yamakaze.%28Kantai.Collection%29.full.2284538.png")
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer.WithText("More information at : https://kancolle.fandom.com/wiki/Yamakaze");

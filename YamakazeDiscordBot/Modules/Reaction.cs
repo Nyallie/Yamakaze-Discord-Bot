@@ -36,6 +36,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -66,6 +67,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -96,6 +98,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -126,6 +129,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -156,6 +160,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -186,6 +191,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -216,6 +222,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -246,6 +253,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -276,6 +284,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -304,6 +313,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -334,6 +344,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -364,6 +375,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithDescription(message)
                 .WithImageUrl(giflink)
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer

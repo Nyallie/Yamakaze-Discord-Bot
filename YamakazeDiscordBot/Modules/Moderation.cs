@@ -47,7 +47,7 @@ namespace YamakazeDiscordBot.Modules
                 await (Context.Channel as ITextChannel).DeleteMessagesAsync(filteredMessages);
                 var EmbedBuilder = new EmbedBuilder()
                     .WithDescription($"Done. Removed {count} {(count > 1 ? "messages" : "message")}.")
-                    .WithColor(_color);
+                    .WithColor(_color).WithCurrentTimestamp();
                 Embed embed = EmbedBuilder.Build();
                 await ReplyAsync(embed: embed);
                 Program.log.WriteCommandToConsole(Context.User.ToString(), "purge");
@@ -70,6 +70,7 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription($":white_check_mark: {user.Mention} was banned.\n **Reason** {reason}")
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -96,6 +97,7 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription($":white_check_mark: {user.Mention} was unbanned.")
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
@@ -123,6 +125,7 @@ namespace YamakazeDiscordBot.Modules
             var EmbedBuilder = new EmbedBuilder()
                 .WithDescription($":white_check_mark: {user.Mention} was kick.\n **Reason** {reason}")
                 .WithColor(_color)
+                .WithCurrentTimestamp()
                 .WithFooter(footer =>
                 {
                     footer
