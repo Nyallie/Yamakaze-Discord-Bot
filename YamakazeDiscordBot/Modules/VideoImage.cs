@@ -29,22 +29,23 @@ namespace YamakazeDiscordBot.Modules
             EmbedBuilder embedBuilderLoading = new EmbedBuilder()
                 .WithTitle("Searching a random video...")
                 .WithImageUrl("https://thumbs.gfycat.com/LittleBestAmoeba-max-14mb.gif")
-                .WithColor(_color);
+                .WithColor(_color);//COnstruction du message d'attente
             Embed embedloading = embedBuilderLoading.Build();
-            var message = await ReplyAsync(embed: embedloading);
+            var message = await ReplyAsync(embed: embedloading);//Envoie du message d'attente
             //Recherche de la vidéo
             bool sucess = true;
             Random rnd = new Random();
             Requethttp req = new Requethttp();
             DataJsonHololive hololive = await req.GetDataJsonHololive(_urlhololive + rnd.Next(1, 8103));
-            EmbedBuilder embedBuilderfinal = new EmbedBuilder().WithCurrentTimestamp();
-            if (hololive == null)
+            //Envoie de la requette vers l'api et traitement du json reçu
+            EmbedBuilder embedBuilderfinal = new EmbedBuilder().WithCurrentTimestamp();//Début de la contruction du message final
+            if (hololive == null)//Si aucune vidéo n'a était trouver ou qu'il y a eu un problèmes avec l'api
             {
                 embedBuilderfinal.WithTitle("Command error")
                     .WithDescription("The API doesn't response succesfuly.");
                 sucess = false;
             }
-            else
+            else//S'il n'y a eu aucun problème
             {
                 VideoHololive vid = hololive.Result[0];
                 string url = "https://www.youtube.com/watch?" + vid.VideoId;
@@ -53,11 +54,10 @@ namespace YamakazeDiscordBot.Modules
                     .AddField(vid.VideoName, vid.Vtuber + "\n" + url)
                     .WithUrl(url)
                     .WithColor(_color)
-                    .WithImageUrl($"https://img.youtube.com/vi/{vidid}/hqdefault.jpg");
+                    .WithImageUrl($"https://img.youtube.com/vi/{vidid}/hqdefault.jpg");//mise en forme du message final avec la vidéo reçu de l'api
             }
             Embed embed = embedBuilderfinal.Build();
-            await message.ModifyAsync(msg => msg.Embed = embed);
-            //await ReplyAsync(embed: embed);
+            await message.ModifyAsync(msg => msg.Embed = embed);//Modification du message d'attente en message finalS
             Program.log.WriteCommandToConsole(Context.User.ToString(), "hololive"+" Réussi : "+sucess);
         }
 
@@ -68,13 +68,13 @@ namespace YamakazeDiscordBot.Modules
             EmbedBuilder embedBuilderLoading = new EmbedBuilder()
                 .WithTitle("Searching sauce...")
                 .WithImageUrl("https://thumbs.gfycat.com/LittleBestAmoeba-max-14mb.gif")
-                .WithColor(_color);
+                .WithColor(_color);//COnstruction du message d'attente
             Embed embedloading = embedBuilderLoading.Build();
-            var message = await ReplyAsync(embed: embedloading);
+            var message = await ReplyAsync(embed: embedloading);//Envoie du message d'attente
             SauceNETClient sauce = new SauceNETClient("7018a095f6d54e1570bb5b4fd0cbcf20fbf4ed48");
-            var result = await sauce.GetSauceAsync(link);
-            List<Result> sourceurl = result.Results.ToList();
-            EmbedAuthorBuilder embedAuthor = new EmbedAuthorBuilder()
+            var result = await sauce.GetSauceAsync(link);//Envoie de la requette pour la ou les sources
+            List<Result> sourceurl = result.Results.ToList();//Récuppération de la liste des sources
+            EmbedAuthorBuilder embedAuthor = new EmbedAuthorBuilder()//Construction de l'auteur du message parce que why not
                 .WithName(Context.Client.CurrentUser.Username)
                 .WithIconUrl(Context.Client.CurrentUser.GetAvatarUrl());
             EmbedBuilder embedBuilder = new EmbedBuilder()
@@ -84,24 +84,23 @@ namespace YamakazeDiscordBot.Modules
                 .WithFooter(footer =>
                 {
                     footer.WithText("Powered by SauceNao Api");
-                });
-            if (sourceurl.Count == 0)
+                });//Contruction de la base du messsage avec les sauces
+            if (sourceurl.Count == 0)//Si l'on ne trouve aucune source
             {
                 embedBuilder.WithDescription("Aucun résultat.");
             }
-            else
+            else//Si il y a une ou des sources de trouver
             {
                 int ind = 0;
-                while (ind < sourceurl.Count && ind < 2)
+                while (ind < sourceurl.Count && ind < 2)//Pour ne pas créer plus de 2 field avec des résultat
                 {
                     EmbedFieldBuilder field = new EmbedFieldBuilder().WithName(sourceurl[ind].Name).WithValue(sourceurl[ind].SourceURL);
                     embedBuilder.AddField(field);
                     ind++;
                 }
             }
-            
             Embed embed = embedBuilder.Build();
-            await message.ModifyAsync(msg => msg.Embed = embed);
+            await message.ModifyAsync(msg => msg.Embed = embed);//Modification du message d'attente en message final
         }
     }
 }
