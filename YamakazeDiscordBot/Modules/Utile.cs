@@ -42,7 +42,9 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Get the latency of the bot")]
         public async Task Ping()
         {
-            var EmbedBuilder = new EmbedBuilder().WithDescription("Pong! :ping_pong:**" + Program._client.Latency + " ms**").WithColor(_color);
+            var EmbedBuilder = new EmbedBuilder()
+                .WithDescription("Pong! :ping_pong:**" + Program._client.Latency + " ms**")
+                .WithColor(_color);
             Embed embed = EmbedBuilder.Build();
             Program.log.WriteCommandToConsole(Context.User.ToString(), "ping");
             await ReplyAsync(embed: embed);
@@ -52,7 +54,9 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Resend the user avatar")]
         public async Task AvatarUser()
         {
-            string avatarlink = Context.User.GetAvatarUrl();
+            ImageFormat format = ImageFormat.Auto;
+            ushort size = 1024;
+            string avatarlink = Context.User.GetAvatarUrl(format,size);
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.WithTitle(Context.User.Username.ToString() + " avatar.");
             embedBuilder.WithImageUrl(avatarlink).WithColor(_color).WithCurrentTimestamp();
@@ -66,7 +70,7 @@ namespace YamakazeDiscordBot.Modules
         public async Task InfoBot()
         {
             EmbedBuilder embedbuilder = new EmbedBuilder();
-            embedbuilder.AddField("Bot version :", "0.5");
+            embedbuilder.AddField("Bot version :", "0.8");
             embedbuilder.AddField("Bot developper :", "Heliodore24#5872");
             embedbuilder.AddField("Program langage and library :", "C#, Discord.Net");
             embedbuilder.WithColor(_color);

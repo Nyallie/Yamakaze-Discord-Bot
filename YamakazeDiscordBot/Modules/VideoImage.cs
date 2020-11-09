@@ -19,17 +19,17 @@ namespace YamakazeDiscordBot.Modules
     public class VideoImage : ModuleBase<SocketCommandContext>
     {
         private string _urlhololive = "https://api.homoliver.live/api/hololive/v1/allvideos?limit=1&offset=";
-        private Color _color = new Color(39, 198, 220);
 
         //Ne fonctionne plus car l'api utiliser n'existe plus
         [Command("hololive")]
         [Summary("Get a random video from hololive")]
         public async Task Hololive()
         {
+            Color color = new Color(39, 198, 220);
             EmbedBuilder embedBuilderLoading = new EmbedBuilder()
                 .WithTitle("Searching a random video...")
                 .WithImageUrl("https://thumbs.gfycat.com/LittleBestAmoeba-max-14mb.gif")
-                .WithColor(_color);//COnstruction du message d'attente
+                .WithColor(color);//COnstruction du message d'attente
             Embed embedloading = embedBuilderLoading.Build();
             var message = await ReplyAsync(embed: embedloading);//Envoie du message d'attente
             //Recherche de la vidéo
@@ -48,13 +48,17 @@ namespace YamakazeDiscordBot.Modules
             else//S'il n'y a eu aucun problème
             {
                 VideoHololive vid = hololive.Result[0];
-                string url = "https://www.youtube.com/watch?" + vid.VideoId;
+                string url = "https://www.youtube.com/watch?v=" + vid.VideoId;
                 string vidid = vid.VideoId;
-                embedBuilderfinal.WithTitle("Random Hololive video")
-                    .AddField(vid.VideoName, vid.Vtuber + "\n" + url)
+                embedBuilderfinal.WithTitle(vid.VideoName)
+                    .AddField(vid.Vtuber + "\n", url)
                     .WithUrl(url)
-                    .WithColor(_color)
-                    .WithImageUrl($"https://img.youtube.com/vi/{vidid}/hqdefault.jpg");//mise en forme du message final avec la vidéo reçu de l'api
+                    .WithColor(color)
+                    .WithImageUrl($"https://img.youtube.com/vi/{vidid}/hqdefault.jpg")
+                    .WithFooter(footer =>
+                    {
+                        footer.WithText("Powered by Homoliver Api");
+                    });//mise en forme du message final avec la vidéo reçu de l'api
             }
             Embed embed = embedBuilderfinal.Build();
             await message.ModifyAsync(msg => msg.Embed = embed);//Modification du message d'attente en message finalS
@@ -65,10 +69,11 @@ namespace YamakazeDiscordBot.Modules
         [Summary("Search the sauce of a image")]
         public async Task Sauce(string link)
         {
+            Color color = new Color(185, 9, 118);
             EmbedBuilder embedBuilderLoading = new EmbedBuilder()
                 .WithTitle("Searching sauce...")
                 .WithImageUrl("https://thumbs.gfycat.com/LittleBestAmoeba-max-14mb.gif")
-                .WithColor(_color);//COnstruction du message d'attente
+                .WithColor(color);//COnstruction du message d'attente
             Embed embedloading = embedBuilderLoading.Build();
             var message = await ReplyAsync(embed: embedloading);//Envoie du message d'attente
             SauceNETClient sauce = new SauceNETClient("7018a095f6d54e1570bb5b4fd0cbcf20fbf4ed48");
@@ -81,6 +86,7 @@ namespace YamakazeDiscordBot.Modules
                 .WithTitle("Sauce Finder")
                 .WithAuthor(embedAuthor)
                 .WithCurrentTimestamp()
+                .WithColor(color)
                 .WithFooter(footer =>
                 {
                     footer.WithText("Powered by SauceNao Api");
@@ -101,6 +107,7 @@ namespace YamakazeDiscordBot.Modules
             }
             Embed embed = embedBuilder.Build();
             await message.ModifyAsync(msg => msg.Embed = embed);//Modification du message d'attente en message final
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "sauce");
         }
     }
 }
