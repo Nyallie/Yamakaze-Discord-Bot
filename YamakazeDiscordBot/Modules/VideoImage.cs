@@ -18,13 +18,15 @@ namespace YamakazeDiscordBot.Modules
 {
     public class VideoImage : ModuleBase<SocketCommandContext>
     {
-        private string _urlhololive = "https://api.homoliver.live/api/hololive/v1/allvideos?limit=1&offset=";
+        private readonly string _urlhololive = "https://api.homoliver.live/api/hololive/v1/allvideos?limit=1&offset=";
+        private int _hololivevid=0;
 
         //Ne fonctionne plus car l'api utiliser n'existe plus
         [Command("hololive")]
         [Summary("Get a random video from hololive")]
         public async Task Hololive()
         {
+            int randomnumber;
             Color color = new Color(39, 198, 220);
             EmbedBuilder embedBuilderLoading = new EmbedBuilder()
                 .WithTitle("Searching a random video...")
@@ -36,9 +38,20 @@ namespace YamakazeDiscordBot.Modules
             bool sucess = true;
             Random rnd = new Random();
             Requethttp req = new Requethttp();
-            DataJsonHololive hololive = await req.GetDataJsonHololive(_urlhololive + rnd.Next(1, 8103));
+            if (_hololivevid == 0)
+            {
+                randomnumber = rnd.Next(1, 8103);
+            }
+            else
+            {
+                randomnumber = _hololivevid;
+            }
+            DataJsonHololive hololive = await req.GetDataJsonHololive(_urlhololive + randomnumber);
+            _hololivevid = hololive.Totalvideo;
             //Envoie de la requette vers l'api et traitement du json reçu
-            EmbedBuilder embedBuilderfinal = new EmbedBuilder().WithCurrentTimestamp();//Début de la contruction du message final
+            EmbedAuthorBuilder embedAuthor = new EmbedAuthorBuilder()//Construction de l'auteur du message parce que why not
+                .WithName("Hololive Video");
+            EmbedBuilder embedBuilderfinal = new EmbedBuilder().WithCurrentTimestamp().WithAuthor(embedAuthor);//Début de la contruction du message final
             if (hololive == null)//Si aucune vidéo n'a était trouver ou qu'il y a eu un problèmes avec l'api
             {
                 embedBuilderfinal.WithTitle("Command error")
@@ -51,17 +64,17 @@ namespace YamakazeDiscordBot.Modules
                 string url = "https://www.youtube.com/watch?v=" + vid.VideoId;
                 string vidid = vid.VideoId;
                 embedBuilderfinal.WithTitle(vid.VideoName)
-                    .AddField(vid.Vtuber + "\n", url)
+                    .WithDescription(vid.Vtuber)
                     .WithUrl(url)
                     .WithColor(color)
-                    .WithImageUrl($"https://img.youtube.com/vi/{vidid}/hqdefault.jpg")
+                    .WithImageUrl($"https://img.youtube.com/vi/{vidid}/sddefault.jpg")
                     .WithFooter(footer =>
                     {
                         footer.WithText("Powered by Homoliver Api");
                     });//mise en forme du message final avec la vidéo reçu de l'api
             }
             Embed embed = embedBuilderfinal.Build();
-            await message.ModifyAsync(msg => msg.Embed = embed);//Modification du message d'attente en message finalS
+            await message.ModifyAsync(msg => msg.Embed = embed);//Modification du message d'attente en message final
             Program.log.WriteCommandToConsole(Context.User.ToString(), "hololive"+" Réussi : "+sucess);
         }
 

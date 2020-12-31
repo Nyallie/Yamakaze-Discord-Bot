@@ -12,9 +12,9 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Reaction : ModuleBase<SocketCommandContext>
     {
-        private static string _baseurlpurr="https://purrbot.site/api/img/sfw";
-        private static string _baseurlneko = "https://nekos.life/api/v2/img/";
-        private Color _color = new Color(169,9,208);
+        private static readonly string _baseurlpurr="https://purrbot.site/api/img/sfw";
+        private static readonly string _baseurlneko = "https://nekos.life/api/v2/img/";
+        private readonly Color _color = new Color(169,9,208);
 
         [Command("bite")]
         [Summary("Bite someone or get bite by the bot")]

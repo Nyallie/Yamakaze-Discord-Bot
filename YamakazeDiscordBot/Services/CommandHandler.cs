@@ -15,7 +15,7 @@ namespace YamakazeDiscordBot
     {
         private readonly DiscordSocketClient _client;
         private readonly CommandService _commands;
-        private PropertiesJson _prop;
+        private readonly PropertiesJson _prop;
 
         public CommandHandler(DiscordSocketClient client, CommandService commands, PropertiesJson js)
         {
@@ -44,7 +44,7 @@ namespace YamakazeDiscordBot
         private async Task HandleCommandAsync(SocketMessage messageParam)
         {
             // Don't process the command if it was a system message
-            var message = messageParam as SocketUserMessage;
+            SocketUserMessage message = messageParam as SocketUserMessage;
             if (message == null) return;
 
             // Create a number to track where the prefix ends and the command begins

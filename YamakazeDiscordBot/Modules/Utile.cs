@@ -11,7 +11,7 @@ namespace YamakazeDiscordBot.Modules
 {
     public class Utile : ModuleBase<SocketCommandContext>
     {
-        private Color _color = new Color(111, 38, 184);
+        private readonly Color _color = new Color(111, 38, 184);
         [Command("help")]
         [Summary("Affiche toute les commandes du bot")]
         public async Task HelpCommand()
@@ -52,13 +52,24 @@ namespace YamakazeDiscordBot.Modules
 
         [Command("avatar")]
         [Summary("Resend the user avatar")]
-        public async Task AvatarUser()
+        public async Task AvatarUser(IGuildUser user = null)
         {
             ImageFormat format = ImageFormat.Auto;
             ushort size = 1024;
-            string avatarlink = Context.User.GetAvatarUrl(format,size);
+            string avatarlink;
+            string username;
+            if (user == null)
+            {
+                avatarlink = Context.User.GetAvatarUrl(format, size);
+                username = Context.User.Username.ToString();
+            }
+            else
+            {
+                avatarlink = user.GetAvatarUrl(format,size);
+                username = user.Username.ToString();
+            }
             EmbedBuilder embedBuilder = new EmbedBuilder();
-            embedBuilder.WithTitle(Context.User.Username.ToString() + " avatar.");
+            embedBuilder.WithTitle(username + " avatar.");
             embedBuilder.WithImageUrl(avatarlink).WithColor(_color).WithCurrentTimestamp();
             Embed emded = embedBuilder.Build();            
             await ReplyAsync(embed: emded);
@@ -86,17 +97,30 @@ namespace YamakazeDiscordBot.Modules
 
         [Command("helpall")]
         [Summary("Explique ce que chaque commandes fait.")]
-        public async Task Help()
+        public async Task HelpAll()
         {
             List<CommandInfo> commands = Program._commands.Commands.ToList();
-            EmbedBuilder embedBuilder = new EmbedBuilder().WithCurrentTimestamp();
-            foreach (CommandInfo command in commands)
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+                .WithCurrentTimestamp()
+                .WithDescription("Here's a list of commands and their description: ")
+                .WithColor(_color)
+                .WithFooter(footer =>
+                {
+                    footer
+                    .WithText("Yamakaze Wiki :\n https://kancolle.fandom.com/wiki/Yamakaze");
+                });
+            int i = 0;
+            while (i<commands.Count)
             {
+                CommandInfo command = commands[i];
                 // Get the command Summary attribute information
-                string embedFieldText = command.Summary ?? "No description available\n";
-                embedBuilder.AddField(command.Name, embedFieldText).WithColor(_color);
+                //string embedFieldText = commands[i].Summary ?? "No description available\n";
+                embedBuilder.AddField(command.Name, command.Summary);
+                Console.WriteLine(command.Name+" : "+ command.Summary);
+                i++;
             }
-            await ReplyAsync("Here's a list of commands and their description: ", false, embedBuilder.Build());
+            Embed embed = embedBuilder.Build();
+            await ReplyAsync(embed: embed);
             Program.log.WriteCommandToConsole(Context.User.ToString(), "helpall");
         }
 
@@ -122,6 +146,46 @@ namespace YamakazeDiscordBot.Modules
             Embed embed = embedbuilder.Build();
             await ReplyAsync(embed: embed);
             Program.log.WriteCommandToConsole(Context.User.ToString(), "yamakaze");
+
+            
+        }
+        [Command("serverinfo")]
+        [Summary("Renvoie les information du serveur sur le quel la commande a était éffectuer")]
+        public async Task InfoServer()
+        {
+            EmbedAuthorBuilder embedAuthor = new EmbedAuthorBuilder()//Construction de l'auteur du message parce que why not
+                .WithName(Context.Guild.Name)
+                .WithIconUrl(Context.Guild.IconUrl);
+            string role="";
+            foreach (IRole role1 in Context.Guild.Roles)
+            {
+                if (role1 == Context.Guild.Roles.Last())
+                {
+                    role = role + role1.Name + ".";
+                }
+                else
+                {
+                    role = role + role1.Name + ", ";
+                }
+            }
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+                .WithAuthor(embedAuthor)
+                .WithThumbnailUrl(Context.Guild.IconUrl)
+                .WithTitle("Server information")
+                .AddField("ID",Context.Guild.Id,true)
+                .AddField("Member", Context.Guild.MemberCount,true)
+                .AddField("Server Owner", Context.Guild.Owner.Username, true)
+                .AddField("Channel",Context.Guild.TextChannels.Count+" Text Channel and "+Context.Guild.VoiceChannels.Count+"Voice Channel")
+                .AddField("Create",Context.Guild.CreatedAt)
+                .AddField("Roles", role)
+                .WithCurrentTimestamp()
+                .WithFooter(footer =>
+                {
+                    footer.WithText("Yamakaze Bot");
+                });
+            Embed embed = embedBuilder.Build();
+            await ReplyAsync(embed: embed);
+            Program.log.WriteCommandToConsole(Context.User.ToString(), "server");
         }
     }
 }

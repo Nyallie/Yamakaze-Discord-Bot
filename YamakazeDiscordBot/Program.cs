@@ -56,6 +56,7 @@ namespace YamakazeDiscordBot
             await _commandhandler.InstallCommandsAsync();
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
+            await _client.SetGameAsync("Watching you tapping the command...");
             // Block this task until the program is closed.
             await Task.Delay(-1);
         }
